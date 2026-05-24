@@ -1,0 +1,21 @@
+{
+  "id": 1,
+  "symbol": "Step Index",
+  "direction": "BUY",
+  "entry": 8017.7,
+  "tp": 8019.2,
+  "sl": 8016.4,
+  "tp_pts": 1.52,
+  "sl_pts": 1.34,
+  "lote": 11.06,
+  "ganancia": 16.81,
+  "riesgo": 14.82,
+  "score": 85,
+  "balance": 9883.96,
+  "hora_mx": "13:07",
+  "hora_utc": "18:07",
+  "trades_hoy": 0,
+  "max_trades": 3,
+  "status": "ACTIVA",
+  "timestamp": 1779646020
+}
