@@ -1,7 +1,7 @@
 {
   "id": 1,
   "symbol": "Step Index",
-  "status": "ACTIVA",
+  "status": "LOSS",
   "direction": "SELL",
   "entry": 8003.3,
   "tp": 7998.3,
@@ -12,14 +12,14 @@
   "ganancia": 0.50,
   "riesgo": 0.30,
   "score": 100,
-  "pnl": 0.00,
-  "close_price": 0.0,
+  "pnl": -19.66,
+  "close_price": 1701.8,
   "capital_base": 100.00,
-  "balance_real": 9881.15,
-  "perdida_hoy": 2.81,
-  "trades_hoy": 0,
+  "balance_real": 9861.49,
+  "perdida_hoy": 22.47,
+  "trades_hoy": 1,
   "max_trades": 3,
-  "hora_mx": "15:30",
-  "hora_utc": "20:30",
-  "timestamp": 1779654600
+  "hora_mx": "15:59",
+  "hora_utc": "20:59",
+  "timestamp": 1779656389
 }
