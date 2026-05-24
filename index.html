@@ -368,8 +368,18 @@ async function fetchSignal() {
 function updateDashboard(sig) {
   if(!sig) return;
   currentSignal = sig;
-  const isActive = sig.status === 'ACTIVA';
-  const dir      = (sig.direction||'').toLowerCase();
+  const isActive  = sig.status === 'ACTIVA';
+  const isWin     = sig.status === 'WIN';
+  const isLoss    = sig.status === 'LOSS';
+  const isClosed  = isWin || isLoss;
+  const dir       = (sig.direction||'').toLowerCase();
+
+  // Mostrar resultado si la operación cerró
+  if(isClosed) {
+    showResult(sig);
+    renderHistorialWithResult(sig);
+    return;
+  }
 
   // Hero
   const hero = document.getElementById('signalHero');
@@ -522,6 +532,69 @@ function showNotif(msg) {
   n.textContent = msg;
   n.classList.add('show');
   setTimeout(()=>n.classList.remove('show'), 3000);
+}
+
+// ══════════════════════════════════════
+// MOSTRAR RESULTADO DE OPERACIÓN
+// ══════════════════════════════════════
+function showResult(sig) {
+  const isWin = sig.status === 'WIN';
+  const hero  = document.getElementById('signalHero');
+  hero.className = 'signal-hero ' + (isWin ? 'buy' : 'sell');
+
+  const db = document.getElementById('dirBadge');
+  db.textContent = isWin ? '✅ WIN' : '❌ LOSS';
+  db.className   = 'dir-badge ' + (isWin ? 'buy' : 'sell');
+
+  const pnl = parseFloat(sig.pnl || 0);
+  document.getElementById('entryPrice').textContent = parseFloat(sig.close_price||0).toFixed(1);
+  document.getElementById('tpPrice').textContent    = isWin ? 'TP Alcanzado' : 'SL Alcanzado';
+  document.getElementById('slPrice').textContent    = '--';
+  document.getElementById('tpPts').textContent      = '';
+  document.getElementById('slPts').textContent      = '';
+  document.getElementById('gainVal').textContent    = (pnl>=0?'+':'') + '$' + Math.abs(pnl).toFixed(2);
+  document.getElementById('gainVal').style.color    = isWin ? 'var(--green)' : 'var(--red)';
+  document.getElementById('riskVal').textContent    = sig.hora_mx || '--';
+  document.getElementById('loteVal').textContent    = sig.trades_hoy + '/' + sig.max_trades;
+
+  const sn = document.getElementById('scoreNum');
+  sn.textContent = isWin ? '🏆' : '💔';
+  sn.style.fontSize = '28px';
+
+  const btn = document.getElementById('execBtn');
+  btn.className = 'exec-btn disabled';
+  btn.innerHTML = isWin
+    ? '<span>✅</span> WIN — $+' + Math.abs(pnl).toFixed(2) + ' — Esperando próxima señal'
+    : '<span>❌</span> LOSS — ' + Math.abs(pnl).toFixed(2) + ' — Esperando próxima señal';
+
+  // Actualizar historial
+  const h = historial.find(x => x.id == sig.id);
+  if(h) {
+    h.result = sig.status.toLowerCase();
+    h.pnl    = pnl;
+    localStorage.setItem('si100_hist', JSON.stringify(historial));
+  }
+  renderHistorial();
+  updateStats();
+
+  // Vibrar diferente según resultado
+  if('vibrate' in navigator)
+    navigator.vibrate(isWin ? [100,50,100,50,300] : [500]);
+
+  showNotif(isWin
+    ? '🏆 WIN +$' + Math.abs(pnl).toFixed(2)
+    : '❌ LOSS -$' + Math.abs(pnl).toFixed(2));
+}
+
+function renderHistorialWithResult(sig) {
+  const h = historial.find(x => x.id == sig.id);
+  if(h) {
+    h.result = sig.status.toLowerCase();
+    h.pnl    = parseFloat(sig.pnl||0);
+    localStorage.setItem('si100_hist', JSON.stringify(historial));
+  }
+  renderHistorial();
+  updateStats();
 }
 
 // ══════════════════════════════════════
