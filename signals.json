@@ -1,7 +1,7 @@
 {
   "id": 1,
   "symbol": "Step Index",
-  "status": "WIN",
+  "status": "LOSS",
   "direction": "SELL",
   "entry": 8003.3,
   "tp": 7998.3,
@@ -12,14 +12,14 @@
   "ganancia": 0.50,
   "riesgo": 0.30,
   "score": 100,
-  "pnl": 10.17,
-  "close_price": 1649.0,
+  "pnl": -20.36,
+  "close_price": 1674.3,
   "capital_base": 100.00,
-  "balance_real": 9921.04,
-  "perdida_hoy": 0.00,
+  "balance_real": 9900.68,
+  "perdida_hoy": 20.36,
   "trades_hoy": 0,
   "max_trades": 3,
-  "hora_mx": "19:32",
-  "hora_utc": "00:32",
-  "timestamp": 1779669125
+  "hora_mx": "20:23",
+  "hora_utc": "01:23",
+  "timestamp": 1779672206
 }
