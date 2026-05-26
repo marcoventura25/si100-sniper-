@@ -12,14 +12,14 @@
   "ganancia": 0.50,
   "riesgo": 0.30,
   "score": 100,
-  "pnl": -7.13,
-  "close_price": 1794.2,
+  "pnl": -11.00,
+  "close_price": 18420.0,
   "capital_base": 100.00,
-  "balance_real": 9859.94,
-  "perdida_hoy": 62.96,
+  "balance_real": 9848.94,
+  "perdida_hoy": 73.96,
   "trades_hoy": 0,
   "max_trades": 3,
-  "hora_mx": "23:49",
-  "hora_utc": "04:49",
-  "timestamp": 1779770964
+  "hora_mx": "00:06",
+  "hora_utc": "05:06",
+  "timestamp": 1779772017
 }
